@@ -8,7 +8,8 @@ This plugin requires sbt 1.0.0+
 
 ### Testing
 
-Run `test` for regular unit tests.
+killbirds/sbt-gitflow-test
+Run `sbt "release with-defaults"`
 
 ### Publishing
 
