@@ -11,3 +11,8 @@ This plugin requires sbt 1.0.0+
 killbirds/sbt-gitflow-test
 Run `sbt "release with-defaults"`
 
+
+### Reference
+
+https://github.com/ServiceRocket/sbt-git-flow
+
