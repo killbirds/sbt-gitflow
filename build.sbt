@@ -1,6 +1,5 @@
 name := """sbt-gitflow"""
 organization := "com.killbirds"
-version := "0.1-SNAPSHOT"
 
 licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
 
