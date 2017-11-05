@@ -11,11 +11,12 @@ releaseProcess := Seq[ReleaseStep](
   runTest,
   gitFlowReleaseStart,                      //git-flow
   setReleaseVersion,
-  commitReleaseVersion,                     //performs the initial git checks
+  commitReleaseVersion,
+  releaseStepCommandAndRemaining("publish"),
   gitFlowReleaseFinish,                     //git-flow
   pushMaster,                               //git-flow
   setNextVersion,
   commitNextVersion,
-  pushChanges                               //checks that an upstream branch is properly configured
+  pushChanges
 )
 
