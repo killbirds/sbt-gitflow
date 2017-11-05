@@ -4,6 +4,7 @@ import sbt._
 import sbtrelease._
 import ReleasePlugin.autoImport.ReleaseKeys.versions
 import ReleasePlugin.autoImport.releaseVcs
+import ReleasePlugin.autoImport.ReleaseStep
 
 object Steps {
   private def releaseVersion(state: State): Either[String, String] = {
@@ -20,39 +21,39 @@ object Steps {
     }
   }
 
-  private def run(fn: GitFlow => Either[String, Unit]): State => State = { state =>
+  private def run(fn: GitFlow => Either[String, Unit]): ReleaseStep = ReleaseStep({ state =>
     (for {
       git <- getGit(state)
       _ <- fn(GitFlow(git))
     } yield ()).swap.foreach(sys.error)
     state
-  }
+  })
 
-  private def run(fn: (GitFlow, String) => Either[String, Unit]): State => State = { state =>
+  private def run(fn: (GitFlow, String) => Either[String, Unit]): ReleaseStep = ReleaseStep({ state =>
     (for {
       git <- getGit(state)
       version <- releaseVersion(state)
       _ <- fn(GitFlow(git), version)
     } yield ()).swap.foreach(sys.error)
     state
-  }
+  })
 
-  val checkGitFlowExists: State => State = run { gitFlow =>
+  val checkGitFlowExists: ReleaseStep = run { gitFlow =>
     for {
       _ <- gitFlow.exists()
       _ <- gitFlow.init()
     } yield ()
   }
 
-  val gitFlowReleaseStart: State => State = run { (gitFlow, version) =>
+  val gitFlowReleaseStart: ReleaseStep = run { (gitFlow, version) =>
     gitFlow.releaseStart(version)
   }
 
-  val gitFlowReleaseFinish: State => State = run { (gitFlow, version) =>
+  val gitFlowReleaseFinish: ReleaseStep = run { (gitFlow, version) =>
     gitFlow.releaseFinish(version)
   }
 
-  val pushMaster: State => State = run { gitFlow =>
+  val pushMaster: ReleaseStep = run { gitFlow =>
     gitFlow.pushMaster()
   }
 }
