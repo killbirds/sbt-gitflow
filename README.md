@@ -4,7 +4,7 @@ git-flow for sbt-release
 
 ## Usage
 
-This plugin requires sbt 1.0.0+
+This plugin requires sbt 1.0.0+ and sbt-release 1.0.6+
 
 ```
 // build.sbt

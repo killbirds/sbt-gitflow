@@ -10,3 +10,6 @@ project/target
 .settings
 bin
 .ensime_cache/
+
+.bloop/
+.metals/
