@@ -13,3 +13,6 @@ bin
 
 .bloop/
 .metals/
+.bsp/
+.vscode/
+metals.sbt
